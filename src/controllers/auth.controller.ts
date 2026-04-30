@@ -272,6 +272,19 @@ export const fetchUser = async (req: Request, res: Response) => {
   return res.status(201).json({ message: "fetch succefully", finsUser });
 };
 
+export const getCurrentUser = async (req: Request, res: Response) => {
+  const user = (req as any).user;
+
+  if (!user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  return res.status(200).json({
+    message: "Current user fetched successfully",
+    user,
+  });
+};
+
 export const refreshAccessToken = async (req: Request, res: Response) => {
   try {
     const refreshToken = req.cookies.refreshToken;
@@ -325,3 +338,47 @@ export const refreshAccessToken = async (req: Request, res: Response) => {
 
 // Key: otp:rahul@gmail.com
 // Value: 7845 (hashed)
+
+
+
+// import redis from "../redis"; // tumhara redis setup
+
+// export const getCurrentUser = async (req: Request, res: Response) => {
+//   const user = (req as any).user;
+
+//   if (!user) {
+//     return res.status(401).json({ message: "Unauthorized" });
+//   }
+
+//   const cacheKey = `user:${user._id}`;
+
+//   try {
+//     // 🔹 1. Redis check
+//     const cachedUser = await redis.get(cacheKey);
+
+//     if (cachedUser) {
+//       console.log("Cache hit 🔥");
+//       return res.status(200).json({
+//         message: "User fetched from cache",
+//         user: JSON.parse(cachedUser),
+//       });
+//     }
+
+//     // 🔹 2. Agar middleware me full user nahi hai to DB fetch
+//     // (optional — depends on your middleware)
+//     // const dbUser = await User.findById(user._id);
+
+//     // 🔹 3. Redis me store
+//     await redis.set(cacheKey, JSON.stringify(user), "EX", 300);
+
+//     console.log("Cache miss ⚠️");
+
+//     return res.status(200).json({
+//       message: "User fetched successfully",
+//       user,
+//     });
+
+//   } catch (err) {
+//     return res.status(500).json({ message: "Server error" });
+//   }
+// };

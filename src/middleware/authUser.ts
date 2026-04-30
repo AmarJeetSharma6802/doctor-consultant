@@ -7,7 +7,7 @@ interface JwtPayloadType {
   user_id: string;
 }
 
-export const authUser =async(req:Request,res:Response,next:NextFunction): Promise<void>=> {
+export const authUser = async(req:Request,res:Response,next:NextFunction): Promise<void>=> {
     try {
         
         const token =
@@ -42,3 +42,22 @@ export const authUser =async(req:Request,res:Response,next:NextFunction): Promis
 }
 
 // Record ek type helper hai jo object ka structure define karta hai.
+
+// any use karna bad practice hai.
+
+// Professional devs custom Request type banate hain.
+// interface AuthRequest extends Request {
+//   user?: any
+// }
+
+// const reqAuth = req as AuthRequest
+
+// reqAuth.user = user
+
+// Jab existing value ka type change (assert) karna ho → as
+// req as any
+
+
+//3️⃣ Brackets kab lagte hain
+// Brackets tab lagte hain jab assertion ke baad property access ya method call ho.
+// (req as any).user
