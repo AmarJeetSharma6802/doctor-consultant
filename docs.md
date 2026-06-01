@@ -28,3 +28,19 @@ Example:
 push → build → deploy server
 ``
 Matlab production update automatically.
+
+
+REFRESHTOKEN = 
+ACCESSTOKEN = k         
+
+
+# npm install @upstash/redis
+UPSTASH_REDIS_REST_URL=""
+UPSTASH_REDIS_REST_TOKEN="
+
+# postgresql primsa url 
+DATABASE_URL="postgresql:
+
+# app pssaword for nodemailer
+EMAIL_USER = 
+EMAIL_PASS = 
